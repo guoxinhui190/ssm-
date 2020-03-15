@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javakc.ssm.attachment.dao.AttachmentDao">
+
+    <sql id="allcolums">
+        name,realname,path,filesize,suffix,download,createtime,state,user_id
+    </sql>
+
+      <select id="queryByPage" parameterType="map" resultType="attachment">
+          select id,<include refid="allcolums"/> from attachment
+          <where>
+              and user_id in (SELECT id from ssm_user where 1 = 1
+              <if test="nickname != null and nickname != ''">
+                  and nickname = #{nickname}
+              </if>)
+              <if test="realnamed != 'null%' ">
+              and realname like #{realnamed}
+              </if>
+              <if test="sdate != null and ldate != null">
+              and createtime between #{sdate} and #{ldate}
+              </if>
+              <if test="sort == 'text'">
+                  and suffix in ('chm','bat','bin','bin1','dll','eml','file','fla','hlp','reg','swf','txt','xml')
+              </if>
+              <if test="sort == 'wps'">
+                  and suffix in ('csv','doc','docx','pdf','pps','ppsx','ppt','pptx','pst','xls','xlsx')
+              </if>
+              <if test="sort == 'images'">
+                  and suffix in ('bmp','dwg','gif','jpeg','jpg','png','psd','tif','theme','tif','tiff')
+              </if>
+              <if test="sort == 'movies'">
+                  and suffix in ('flv','avi','f4v','ifv','mkv','mkvl','mov','mp4','mpeg','mpg','wmv')
+              </if>
+              <if test="sort == 'muisc'">
+                  and suffix in ('ape','au','flac','mid','midi','mp3','mp31','ogg','wav','wma')
+              </if>
+              <if test="sort == 'html'">
+                  and suffix in ('css','html','php','url')
+              </if>
+              <if test="sort == 'exe'">
+                  and suffix in ('exe')
+              </if>
+              <if test="sort == 'zip'">
+                  and suffix in ('7z','cba','rar','tar','zip')
+              </if>
+              <if test="sort == 'datesouce'">
+                  and suffix in ('mdb','odbc','sql')
+              </if>
+              <if test="sort == 'else'">
+                  and suffix in ('fon','ini','playlist','rtf','sys','ttf')
+              </if>
+              <if test="sort == 'all'">
+              </if>
+          </where>
+          limit #{start},#{size}
+      </select>
+      <select id="queryByCount" parameterType="map" resultType="long">
+             select count(1) from attachment
+      </select>
+      <select id="queryById" parameterType="int" resultType="attachment">
+             select <include refid="allcolums" /> from attachment where id = #{id}
+      </select>
+    <insert id="insert" parameterType="attachment">
+        insert into attachment(<include refid="allcolums"/>)
+         values(#{name},#{realname},#{path},#{filesize},#{suffix},#{download},#{createtime},#{state},#{user.id})
+    </insert>
+    <delete id="delete" parameterType="int">
+        delete from attachment where id = #{id}
+    </delete>
+    <update id="update" parameterType="attachment">
+        update attachment set realname = #{realname} where id = #{id}
+    </update>
+    <update id="updateDown" parameterType="int">
+        update attachment set download = download + 1 where id = #{id}
+    </update>
+    <delete id="batch" parameterType="int">
+        delete from attachment
+         <where>
+               <foreach collection="array" item="id">
+                   or id = #{id}
+               </foreach>
+         </where>
+    </delete>
+</mapper>

@@ -1,0 +1,11 @@
+com\javakc\ssm\attachment\service\impl\AttachmentServiceImpl.class
+com\javakc\ssm\user\dao\UserDao.class
+com\javakc\ssm\attachment\service\AttachmentService.class
+com\javakc\ssm\user\service\UserService.class
+com\javakc\ssm\attachment\entity\Attachment.class
+com\javakc\ssm\component\Page.class
+com\javakc\ssm\user\entity\User.class
+com\javakc\ssm\attachment\dao\AttachmentDao.class
+com\javakc\ssm\user\service\impl\UserServiceImpl.class
+com\javakc\ssm\attachment\controller\AttachmentController.class
+com\javakc\ssm\user\controller\UserController.class
