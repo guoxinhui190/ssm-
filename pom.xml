@@ -49,7 +49,7 @@
         <!--   apache dbcp2连接池     -->
         <dbcp2.version>2.7.0</dbcp2.version>
         <!--   junit 单元测试   -->
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <!--   servlet api     -->
         <servlet.version>3.1.0</servlet.version>
         <!--   spring mvc json     -->
