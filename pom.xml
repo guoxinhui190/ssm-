@@ -39,7 +39,7 @@
         <!--   spring ioc, aop, jdbc, mvc, test     -->
         <spring.version>5.2.2.RELEASE</spring.version>
         <!--spring-security-->
-        <spring-security.version>5.2.1.RELEASE</spring-security.version>
+        <spring-security.version>5.2.10.RELEASE</spring-security.version>
         <!--   mybatis core     -->
         <mybatis.version>3.5.3</mybatis.version>
         <!--   mybatis与spring整合     -->
